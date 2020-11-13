@@ -26,6 +26,7 @@
 <script>
 img = "";
 status="";
+objects="";
 function preload(){
   img = loadImage('tv.jpg');
 }
@@ -53,11 +54,17 @@ function gotResult(error, results) {
 
 function draw() {
 image(img,0,0,640,420)
-  text("tv 79%", 176.62758111953735, 286.81073236465454);
-  fill(255, 0, 0);
-  noFill();
-      stroke(255, 0, 0);
-  rect(171.62758111953735, 273.81073236465454, 219.4103479385376,175.1543641090393);
+if(status!=""){
+           for(i=0;i<objects.length;i++){
+               document.getElementById("status").innerHTML="Staus : Object Detected";
+               fill('#32a885');
+               percent=floor(objects[i].confidence*100)+"%";
+               text(objects[i].label+" "+percent,objects[i].x+15,objects[i].y+15);
+               noFill();
+               stroke('#32a885');
+               rect(objects[i].x,objects[i].y,objects[i].width,objects[i].height);
+           }
+       }
 }
 
 </script>

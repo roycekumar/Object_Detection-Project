@@ -29,6 +29,7 @@
 
 img = "";
 status="";
+objects="";
 function preload(){
   img = loadImage('fruit.jpg');
 }
@@ -58,20 +59,17 @@ function gotResult(error, results) {
 
 function draw() {
 image(img,0,0,640,420)
-  noStroke();
-      fill(0, 255, 0);
-
-      text("banana 95%", 157.87449955940247, 111.07947617769241);
-      noFill();
-      stroke(0, 255, 0);
-      rect(152.87449955940247,96.07947617769241,148.4956443309784,243.844173848629);
-      noStroke();
-      fill(0, 255, 0);
-
-      text("bowl 94%", 89.28987860679626, 296.3134491443634);
-      noFill();
-      stroke(0, 255, 0);
-      rect(84.28987860679626,281.3134491443634,336.00538969039917,195.905864238739);
+if(status!=""){
+           for(i=0;i<objects.length;i++){
+               document.getElementById("status").innerHTML="Staus : Object Detected";
+               fill('#dea814');
+               percent=floor(objects[i].confidence*100)+"%";
+               text(objects[i].label+" "+percent,objects[i].x+15,objects[i].y+15);
+               noFill();
+               stroke('#dea814');
+               rect(objects[i].x,objects[i].y,objects[i].width,objects[i].height);
+           }
+       }
 }
 
 </script>

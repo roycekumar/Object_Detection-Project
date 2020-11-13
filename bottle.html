@@ -29,6 +29,7 @@
 
 img = "";
 status="";
+objects="";
 
 function preload(){
   img = loadImage('bottle.jpg');
@@ -59,33 +60,17 @@ function gotResult(error, results) {
 function draw() {
 
   image(img,0,0,640,420);
-  noStroke();
-      fill(0, 255, 0);
-
-      text("bottle 89%", 79.05456379055977, 168.4637612104416);
-      noFill();
-      stroke(0, 255, 0);
-      rect(74.05456379055977, 153.4637612104416,124.25010725855827,378.51145136356354);
-      noStroke();
-      fill(0, 255, 0);
-
-      text("bottle 88%", 539.4657123088837, 224.166983127594);
-      noFill();
-      stroke(0, 255, 0);
-      rect(534.4657123088837,209.166983127594,139.97933864593506,313.704541683197);
-      noStroke();
-      fill(0, 255, 0);
-
-      text("bottle 76%", 239.88388657569885, 164.18721342086792);
-      noFill();
-      stroke(0, 255, 0);
-      rect(234.88388657569885,149.18721342086792,114.9867832660675,376.2934341430664);
-      fill(0, 255, 0);
-
-text("bottle 62%", 409.221048951149, 142.31045484542847);
-noFill();
-stroke(0, 255, 0);
-rect(404.221048951149,127.31045484542847,101.89575254917145,407.9583640098572);
+  if(status!=""){
+           for(i=0;i<objects.length;i++){
+               document.getElementById("status").innerHTML="Staus : Object Detected";
+               fill('#FF0000');
+               percent=floor(objects[i].confidence*100)+"%";
+               text(objects[i].label+" "+percent,objects[i].x+15,objects[i].y+15);
+               noFill();
+               stroke('#FF0000');
+               rect(objects[i].x,objects[i].y,objects[i].width,objects[i].height);
+           }
+       }
 }
 
 </script>
